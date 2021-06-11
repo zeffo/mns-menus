@@ -1,7 +1,10 @@
 # mns-menus
 Package to help create CLI, menu based applications. 
 
-Example Program:
+# Installation
+`python3 -m pip install mns-menus`
+
+# Example Program:
 
 ```py
 
