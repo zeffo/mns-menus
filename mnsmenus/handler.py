@@ -30,7 +30,7 @@ class Handler:
 
     def handle(self, ctx, args):
         try:
-            ctx.command(*args[:len(ctx.command.args)])
+            ctx.command(*args[:ctx.command.args])
         except Exception as e:
             self._error_handler(ctx, e)
 
