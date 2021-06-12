@@ -2,7 +2,7 @@
 Package to help create CLI, menu based applications. 
 
 # Installation
-`python3 -m pip install mns-menus`
+`python3 -m pip install git+https://github.com/zeffo/mns-menus.git`
 
 # Example Program:
 
