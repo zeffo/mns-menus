@@ -1,7 +1,6 @@
 from functools import wraps
 from .command import Command, Context, HelpCommand, MenuCommand
 
-
 class MissingRequiredArguments(Exception):
     """Raised when arguments are missing"""
 
@@ -30,10 +29,10 @@ class Handler:
         return wrapper
 
     def handle(self, ctx, args):
-        if len(args) == ctx.command.args:
-            ctx.command(ctx, *args[: len(args)])
-        else:
-            self._error_handler(ctx, MissingRequiredArguments())
+        try:
+            ctx.command(*args[:len(ctx.command.args)])
+        except Exception as e:
+            self._error_handler(ctx, e)
 
     def start(self):
         """Starts a loop to listen for commands"""
