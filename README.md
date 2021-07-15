@@ -8,7 +8,7 @@ Package to help create CLI, menu based applications.
 
 ```py
 
-from mnsmenus import Handler, MissingRequiredArguments
+from menus import Handler, MissingRequiredArguments
 
 handler = Handler(prompt='Enter Command: ')
 
