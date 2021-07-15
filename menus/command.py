@@ -1,13 +1,15 @@
 from inspect import signature
-from typing import Callable
+from typing import Callable, Optional
 
+class ConversionFailure(Exception):
+    """ Raised when a parameter could not be converted """
 
 class Command:
     """Base class to represent a command"""
 
-    def __init__(self, func: Callable, usage: str) -> None:
+    def __init__(self, func: Callable, usage: Optional[str]=None) -> None:
         self.func = func
-        self.usage = usage
+        self.usage = usage or f"{func.__name__}: {func.__doc__}"
 
     @property
     def desc(self):
@@ -20,8 +22,22 @@ class Command:
     def __str__(self):
         return self.func.__name__
 
+    def convert(self, args):
+        c_args = []
+        for given, anno in zip(args, signature(self.func).parameters.values()):
+            conv = given
+            if anno.annotation is not anno.empty:
+                try:
+                    conv = anno.annotation(given)
+                except Exception:
+                    raise ConversionFailure(str(anno.annotation))
+            c_args.append(conv)
+                
+        return c_args
+        
+
     def __call__(self, *args):
-        self.func(*args)
+        self.func(*self.convert(args))
 
     @property
     def args(self):

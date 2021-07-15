@@ -24,11 +24,10 @@ class Handler:
     def add_command(self, command):
         self.commands[command.name] = command
 
-    def command(self, *, usage):
+    def command(self, usage=None):
         def wrapper(func):
             func.usage = usage
             self.add_command(Command(func, usage))
-
         return wrapper
 
     def handle(self, ctx, args):
