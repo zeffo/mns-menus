@@ -8,6 +8,8 @@ class MissingRequiredArguments(Exception):
 
 class Handler:
 
+    """Base class to handle commands and events"""
+
     commands = {"help": HelpCommand(), "menu": MenuCommand()}
 
     def error_handler(self, func):
@@ -31,7 +33,7 @@ class Handler:
 
     def handle(self, ctx, args):
         try:
-            ctx.command(ctx, *args[: ctx.command.args])
+            ctx.command(ctx, *args)
         except Exception as e:
             self._error_handler(ctx, e)
 
@@ -45,4 +47,4 @@ class Handler:
                 ctx = Context(self, command)
                 self.handle(ctx, args)
             else:
-                self.menu()
+                self.commands['menu'](ctx)
