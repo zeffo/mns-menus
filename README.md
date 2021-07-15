@@ -33,3 +33,5 @@ handler.start()
 Output:
 
 ![image](https://media.discordapp.net/attachments/734363926208184320/852818765384384512/unknown.png)
+
+<sup>Decorator design inspired by Rapptz/discord.py </sup>
