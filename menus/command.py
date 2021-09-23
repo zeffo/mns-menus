@@ -1,4 +1,4 @@
-from inspect import signature
+from inspect import signature, Parameter
 from typing import Callable, Optional
 
 class ConversionFailure(Exception):
@@ -25,6 +25,8 @@ class Command:
     def convert(self, args):
         c_args = []
         for given, anno in zip(args, signature(self.func).parameters.values()):
+            if anno.kind == Parameter.VAR_POSITIONAL:
+                return [anno.annotation(arg) for arg in args] if anno.annotation is not anno.empty else args
             conv = given
             if anno.annotation is not anno.empty:
                 try:
