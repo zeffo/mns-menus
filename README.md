@@ -1,5 +1,5 @@
 # mns-menus
-Package to help create CLI, menu based applications. 
+decorator based command parser built for quickly completing school assignments.
 
 # Installation
 `git clone https://github.com/zeffo/mns-menus.git`
