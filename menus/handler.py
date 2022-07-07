@@ -41,9 +41,9 @@ class Handler:
         while True:
             main = input(self.prompt)
             args = main.split()
-            command = self.commands.get(args.pop(0))
+            command = self.commands.get(args[0])
             if command:
                 ctx = Context(self, command)
-                self.handle(ctx, args)
+                self.handle(ctx, args[1:])
             else:
                 self.commands['menu'](ctx)
